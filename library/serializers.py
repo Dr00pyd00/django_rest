@@ -3,8 +3,6 @@ from rest_framework import serializers
 from .models import Author, Book
 
 
-
-
 class AuthorSerializer(serializers.ModelSerializer):
     """
     - normal : prend un objet AUTHOR et le transforme en dict python
@@ -17,6 +15,8 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ['id', 'name', 'birth']
+
+
 
 class BookSerializer(serializers.ModelSerializer):
 
