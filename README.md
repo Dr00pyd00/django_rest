@@ -129,8 +129,43 @@ python manage.py migrate
 
 
 
+## Serializers 
+
+Sert a passer des objets python en dict  et inversement, pour ensuite les passer en json par exemple.       
+```python 
+# creer dans l'app : library/serialisers.py 
+
+from rest_framework import serializers
+from .models import Author, Book
 
 
+class AuthorSerializer(serializers.ModelSerializer):
+   class Meta:
+        model = Author
+        fields = ['id', 'name', 'birth']
+
+class BookSerializer(serializers.ModelSerializer):
+
+    # si jamais on veut que le champ author ai le dict complet et pas que le id:
+    # ajouter:
+    # author = AuthorSerializer()
+    # pas forcement besoin car on a acces a la data si besoin par un autre moyen
+
+    class Meta:
+        model = Book
+        fields = ['id', 'author', 'title', 'year']
+```
+S'en servir:
+```python 
+ser = AuthorSerializer(author_object) 
+ser.data  # donnees pretes a etre utiliser pour creer un objet plyus tard : dict python
+
+# va return un objet python:
+ser2 = BookSerializer(data=author_dict) # preciser 'data=' ABSOLUMENT
+ser2.is_valid() # check si les data sont bonnes 
+ser2.validated_data # voir les data
+ser2.save()
+```
 
 
 
