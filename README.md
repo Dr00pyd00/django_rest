@@ -213,6 +213,25 @@ python manage.py test
 
 
 
+# Permissions
+
+A la base n'importe qui peut modifier la db si il a les urls.  
+
+- `Authentication` = lit la requete (header,cookie,token), identifie le user puis pose dans `request.user`, si echoue pose `AnonymousUser`.
+- `Persmissions` = regarde request.user et l'action demande et regarde si c'est permis par le server.
+
+Les permissions utiles:
+- `AllowAny` = tout le monde peut tout faire
+- `IsAuthenticated` = il FAUT etre connecte
+- `IsAuthenticatedOReadOnly` = lecture ouverte a tous , sinon connexion requise
+- `IsAdminUser` = reserver au user avec is_staff=True
+
+Ajouter dans settings.py:
+```python 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [ 'rest_framework.permissions.IsAuthenticated' ]
+}
+```
 
 
 
