@@ -13,6 +13,20 @@ from library.models import Book, Author
 # .headers : metadonnees 
 # .data : exemple liste d'object , contenu du json ?
 
+
+# ===================== PAGINATION ======================= #
+# response.data :
+   # avant pagination: [{'id': 1, 'author': 1, 'title': 'la peste', 'year': 1968}]
+    # apres le setup pagination:
+#  {
+#     'count': 1,
+#     'next': None,
+#     'previous': None,
+#     'results': [
+#         {'id': 1, 'author': 1, 'title': 'la peste', 'year': 1968}
+#     ]   
+# }
+
 class BookAPITests(APITestCase):
     def setUp(self) -> None:
         self.author = Author.objects.create(name='Albert Camus', birth='1913-07-11')
@@ -20,10 +34,12 @@ class BookAPITests(APITestCase):
 
     def test_list_book(self):
         response = self.client.get(reverse('book-list'))
+        print(response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]['title'], self.book.title)
+        self.assertEqual(len(response.data['results']), 1)
+        self.assertEqual(response.data['results'][0]['title'], self.book.title)
         self.assertContains(response, self.book.title)
+        
 
     def test_detail_book(self):
         response = self.client.get(reverse('book-detail', args=[self.book.id]))
