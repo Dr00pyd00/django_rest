@@ -29,6 +29,12 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering =['title'] # ordre par defaut des requetes 
+        verbose_name = 'Lilivres' # nom dans admin singulier
+        verbose_name_plural = 'Lilivres' # nom dans admin pluriel
+        # db_table = 'nouveau_nom' # nom de la table en db
+        # constraints = [models.UniqueConstraint(fields=['title', 'author'], name='unique_book_per_author')] : rend uniaue les couples 
 
 class Loan(models.Model):   # emprunt
     book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True)
