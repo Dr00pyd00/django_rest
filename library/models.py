@@ -22,7 +22,9 @@ class Book(models.Model):
 
     @property
     def is_available(self):
-        return self.loan_set.filter(return_date__isnull=True).exists()
+        # si dans ces loans , une return date est null ca veut dire quil est en cours d'emprunt,
+        # donc on return l'inverse donc False
+        return not self.loan_set.filter(return_date__isnull=True).exists()
 
     def __str__(self):
         return self.title
