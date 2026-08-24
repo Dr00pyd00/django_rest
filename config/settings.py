@@ -33,6 +33,9 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # Application definition
 
 INSTALLED_APPS = [
+    'demo_function.apps.DemoFunctionConfig',
+    'demo_apiview.apps.DemoApiviewConfig',
+    'demo_viewset.apps.DemoViewsetConfig',
     'accounts.apps.AccountsConfig',
     'rest_framework',
     'library.apps.LibraryConfig',
@@ -137,7 +140,7 @@ REST_FRAMEWORK = {
         'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',
         'PAGE_SIZE': 20,
         
-        'DEFAULT_PERMISSION_CLASSES': [ 'rest_framework.permissions.IsAuthenticatedOrReadOnly' ],
+        # 'DEFAULT_PERMISSION_CLASSES': [ 'rest_framework.permissions.IsAuthenticatedOrReadOnly' ],
 
         }
 
