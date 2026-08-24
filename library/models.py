@@ -30,7 +30,7 @@ class Book(models.Model):
         return self.title
 
     class Meta:
-        ordering =['title'] # ordre par defaut des requetes 
+        ordering = ['title'] # ordre par defaut des requetes 
         verbose_name = 'Lilivres' # nom dans admin singulier
         verbose_name_plural = 'Lilivres' # nom dans admin pluriel
         # db_table = 'nouveau_nom' # nom de la table en db
@@ -44,6 +44,10 @@ class Loan(models.Model):   # emprunt
 
     def __str__(self):
         return f'loan {self.book} by {self.user}'
+
+    class Meta:
+        ordering = ['book']
+        
 
 
 

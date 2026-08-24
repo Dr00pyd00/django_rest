@@ -1,7 +1,8 @@
 
 from rest_framework.routers import DefaultRouter
+from django.urls import path
 
-from library.views import AuthorViewSet, BookViewSet
+from library.views import AuthorViewSet, BookViewSet, create_loan_func
 
 # on creer un objet router, ou lui attribut les views 
 
@@ -10,7 +11,10 @@ router = DefaultRouter()
 router.register('books', BookViewSet)
 router.register('authors', AuthorViewSet)
 
-urlpatterns = router.urls 
+
+urlpatterns = [
+        path('loans/create/', create_loan_func, name='loan-create')
+        ] + router.urls 
 
 
 
