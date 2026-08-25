@@ -23,6 +23,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('demo_function/', include('demo_function.urls')),
     path('demo_apiview/', include('demo_apiview.urls')),
+    path('demo_viewset/', include('demo_viewset.urls')),
+
 
 
 ]
